@@ -2,6 +2,7 @@ import os
 
 
 GITHUB_API_TOKEN = os.getenv("GITHUB_API_TOKEN")
+TEST_USER_NAME = "IuliaSavk"
 
 
 HEADERS = {

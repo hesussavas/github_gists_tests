@@ -1,5 +1,6 @@
 import random
 from playwright.sync_api import APIRequestContext
+from tests.variables import TEST_USER_NAME
 
 
 def test_get_users_gists_success(api_request_context: APIRequestContext, create_public_test_gist) -> None:
@@ -41,6 +42,12 @@ def test_get_nonexistent_user_gist_returns_404(api_request_context: APIRequestCo
 def test_get_private_gist_by_id_for_unauthorized_user_success (api_request_context_unauthorized: APIRequestContext, create_private_test_gist):
     test_gist_id, test_gist_description = create_private_test_gist
     result = api_request_context_unauthorized.get(f"/gists/{test_gist_id}")
-    
+
     assert result.ok
     assert result.json()['description'] == test_gist_description
+
+def test_get_list_private_gists_users_by_unatorized_user_failed (api_request_context_unauthorized: APIRequestContext, create_private_test_gist):
+    
+    result = api_request_context_unauthorized.get(f"/users/{TEST_USER_NAME}/gists")
+    assert result.ok
+    assert result.json() == []
