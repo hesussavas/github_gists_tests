@@ -12,6 +12,14 @@ HEADERS = {
     "Authorization": f"token {GITHUB_API_TOKEN}"
 }
 
+HEADERS_UNAUTHORIZED = {
+    # Those headers for unathorised user per GitHub guidelines.
+    "Accept": "application/vnd.github.v3+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+
+   
+}
+
 
 DESCRIPTION = "test description"
 PUBLIC = True

@@ -1,10 +1,9 @@
-from time import sleep
 from typing import Generator
 
 import pytest
 from playwright.sync_api import Playwright, APIRequestContext
 
-from variables import HEADERS, PRIVATE_BODY, PUBLIC_BODY, DESCRIPTION
+from tests.variables import HEADERS, HEADERS_UNAUTHORIZED, PRIVATE_BODY, PUBLIC_BODY, DESCRIPTION
 
 
 @pytest.fixture(scope="session")
@@ -17,6 +16,15 @@ def api_request_context(
     yield request_context
     request_context.dispose()
 
+@pytest.fixture(scope="session")
+def api_request_context_unauthorized(
+    playwright: Playwright,
+) -> Generator[APIRequestContext, None, None]:
+    request_context = playwright.request.new_context(
+        base_url="https://api.github.com", extra_http_headers=HEADERS_UNAUTHORIZED
+    )
+    yield request_context
+    request_context.dispose()
 
 
 @pytest.fixture()

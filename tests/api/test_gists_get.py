@@ -37,3 +37,10 @@ def test_get_nonexistent_user_gist_returns_404(api_request_context: APIRequestCo
     result = api_request_context.get(f"/gists/{nonexistent_id}")
 
     assert result.status == 404
+
+def test_get_private_gist_by_id_for_unauthorized_user_success (api_request_context_unauthorized: APIRequestContext, create_private_test_gist):
+    test_gist_id, test_gist_description = create_private_test_gist
+    result = api_request_context_unauthorized.get(f"/gists/{test_gist_id}")
+    
+    assert result.ok
+    assert result.json()['description'] == test_gist_description

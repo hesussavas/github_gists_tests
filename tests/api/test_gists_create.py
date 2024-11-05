@@ -4,7 +4,7 @@ from playwright.sync_api import APIRequestContext
 
 @pytest.mark.parametrize("public", [True, False])
 def test_create_gist_sucsess(api_request_context: APIRequestContext, cleanup_gists: list, public) -> None:
-    description = "bla-bla"
+    description = "test"
     body = {
         "description": description,
         "public": public,
