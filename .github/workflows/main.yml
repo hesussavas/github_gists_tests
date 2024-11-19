@@ -37,7 +37,6 @@ jobs:
     - name: Set up Docker
       run: |
         docker --version
-        docker-compose --version
 
     # Install dependencies
     - name: Install dependencies
